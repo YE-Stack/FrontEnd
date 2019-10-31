@@ -8,8 +8,9 @@ export default class Home extends Component {
 	constructor(props) {
     	super(props);
    		this.state = {
-			text:"",
-			num:"",
+			text: "",
+            num: "",
+            result: "",
 		};
 	}		
 
@@ -19,8 +20,13 @@ export default class Home extends Component {
 		firebase.database().ref('mobile/' ).set({
 			text:this.state.text,
 			number:this.state.num,
-		});
-		
+        });
+        let temp;
+        firebase.database().ref('mobile/').on('value', function (snapshot) {
+            console.log(snapshot.val())
+            temp = snapshot.val();
+        });
+        this.setState({result: temp})       		
 	}
 
 	render() {
