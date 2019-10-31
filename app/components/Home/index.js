@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,TextInput, TouchableOpacity, ImageBackground, KeyboardAvoidingView } from 'react-native';
-import styles from './styles'
-import img from '../assets/background.jpg'
-import firebase from '../Config/config.js'
+import styles from './styles';
+import img from '../assets/background.jpg';
+import firebase from '../Config/config.js';
+import NotificationPopup from 'react-native-push-notification-popup';
+import PushNotification from '../Pushcontrol'
 
 export default class Home extends Component {
 	constructor(props) {
@@ -11,28 +13,50 @@ export default class Home extends Component {
 			text: "",
             num: "",
             result: "",
+            siteUser:null,
 		};
-	}		
-
+    }
 	writeData=()=>{
 		console.log(this.state.text);
 		console.log(this.state.num);
 		firebase.database().ref('mobile/' ).set({
 			text:this.state.text,
 			number:this.state.num,
-        });
-        let temp;
-        firebase.database().ref('mobile/').on('value', function (snapshot) {
-            console.log(snapshot.val())
-            temp = snapshot.val();
-        });
-        this.setState({result: temp})       		
-	}
+        });    		
+    }
 
+  checkData=()=>{
+          
+          let result = null;      		
+          
+          firebase.database().ref('result/').on('value', function (snapshot) {
+              console.log(snapshot.val())
+              result = snapshot.val();
+          });
+          console.warn(result)
+
+          if(result !== undefined && result !== null){
+              this.popup.show({
+              onPress: function() {console.log('Pressed')},
+              appIconSource: require('../assets/background.jpg'),
+              appTitle: 'Message',
+              timeText: 'Now',
+              title: 'Hello World',
+              body: result,
+              slideOutTime: 5000
+              });
+          }
+
+  }
+
+  componentDidMount() {
+      this.checkData();
+  }
 	render() {
-    	return (
+        return (
             <KeyboardAvoidingView>
-                <ImageBackground source={img} style={{width: '100%', height: '100%'}}>
+                <ImageBackground source={img} style={{width: '100%', height: '100%',}}>
+                            <NotificationPopup ref={ref => this.popup = ref} />
                     <View style={styles.container}>
                         <View style={styles.divide}>
                             {/* header */}
@@ -73,6 +97,7 @@ export default class Home extends Component {
                             <Text>Space for output</Text>
                         </View>
                     </View>
+                    <PushNotification/>
                 </ImageBackground>	
             </KeyboardAvoidingView>
     );

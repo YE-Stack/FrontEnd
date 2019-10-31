@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "867456544767",
+    "firebase_url": "https://yestack1.firebaseio.com",
+    "project_id": "yestack1",
+    "storage_bucket": "yestack1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:867456544767:android:b3d1c2edde94c8ec3281ca",
+        "android_client_info": {
+          "package_name": "com.ye"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "867456544767-86qkgc1ma6cfem7t9t72is2c645g4g2m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ye",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "867456544767-h7v8at8puasbs3a56q1h4hg87mcmp5rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArVNhnMd6s0F0QTn8I9iyoR8oI88rBirE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "867456544767-h7v8at8puasbs3a56q1h4hg87mcmp5rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
