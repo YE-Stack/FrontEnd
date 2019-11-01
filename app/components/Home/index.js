@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,TextInput, TouchableOpacity, ImageBackground, KeyboardAvoidingView } from 'react-native';
 import styles from './styles';
@@ -7,69 +8,71 @@ import NotificationPopup from 'react-native-push-notification-popup';
 import PushNotification from '../Pushcontrol'
 
 export default class Home extends Component {
-	constructor(props) {
-    	super(props);
-   		this.state = {
-			text: "",
+    constructor(props) {
+        super(props);
+           this.state = {
+            text: "",
             num: "",
             result: "",
             siteUser:null,
-		};
+        };
     }
-	writeData=()=>{
-		console.log(this.state.text);
-		console.log(this.state.num);
-		firebase.database().ref('mobile/' ).set({
-			text:this.state.text,
-			number:this.state.num,
-        });    		
+    writeData=()=>{
+        console.log(this.state.text);
+        console.log(this.state.num);
+        firebase.database().ref('mobile/' ).set({
+            text:this.state.text,
+            number:this.state.num,
+        });            
     }
 
-  checkData=()=>{
+    checkData=()=>{
+        let result = null;              
           
-          let result = null;      		
-          
-          firebase.database().ref('result/').on('value', function (snapshot) {
-              console.log(snapshot.val())
-              result = snapshot.val();
-          });
-          console.warn(result)
+        firebase.database().ref('result/').on('value', (snapshot)=>{
+            // console.log(snapshot.val());
+            result = snapshot.val();
+            this.setState({
+                result:result,
+            })
+            this.forceUpdate()
+            console.log(this.state.result)
+        });
+    
 
-          if(result !== undefined && result !== null){
-              this.popup.show({
-              onPress: function() {console.log('Pressed')},
-              appIconSource: require('../assets/background.jpg'),
-              appTitle: 'Message',
-              timeText: 'Now',
-              title: 'Hello World',
-              body: result,
-              slideOutTime: 5000
-              });
-          }
 
-  }
+        //   if(result !== undefined && result !== null){
+        //       this.popup.show({
+        //       onPress: function() {console.log('Pressed')},
+        //       appIconSource: require('../assets/background.jpg'),
+        //       appTitle: 'Message',
+        //       timeText: 'Now',
+        //       title: 'Hello World',
+        //       body: result,
+        //       slideOutTime: 5000
+        //       });
+        //   }
 
-  componentDidMount() {
-      this.checkData();
-  }
-	render() {
+    }
+
+    componentDidMount() {
+        this.checkData();
+    }
+
+    render() {
         return (
             <KeyboardAvoidingView>
                 <ImageBackground source={img} style={{width: '100%', height: '100%',}}>
-                            <NotificationPopup ref={ref => this.popup = ref} />
+                        {/* <NotificationPopup ref={ref => this.popup = ref} /> */}
                     <View style={styles.container}>
                         <View style={styles.divide}>
-                            {/* header */}
-                            {/* <View style={styles.header}>
-                                <Text style={styles.headerText}>Input</Text>
-                            </View> */}
                             {/* input area */}
                             <View style={styles.body}>
                                 {/* body area */}
-                                <View style={styles.inputPadding}>
+                            <View style={styles.inputPadding}>
                                     <TextInput placeholderTextColor="#C0C0C0"
-										style={styles.input}
-										onChangeText={(text)=>this.setState({text})}
+                                        style={styles.input}
+                                        onChangeText={(text)=>this.setState({text})}
                                         placeholder="Enter a Text"
                                         keyboardType="default"
                                         />
@@ -78,8 +81,8 @@ export default class Home extends Component {
                                 <View style={styles.inputPadding}>
                                     <TextInput placeholderTextColor="#C0C0C0"
                                         style={styles.input}
-										placeholder="Enter a Number"
-										onChangeText={(num)=>this.setState({num})}
+                                        placeholder="Enter a Number"
+                                        onChangeText={(num)=>this.setState({num})}
                                         keyboardType="number-pad"
                                         />
                                 </View>
@@ -92,13 +95,20 @@ export default class Home extends Component {
                             </View>
                         </View>
 
-                        <View style={styles.divide}>
-                            {/* Space for output */}
-                            <Text>Space for output</Text>
+                        <View style={[styles.divide,{backgroundColor: '#FFFFFF',borderRadius:10,opacity:0.6}]}>
+                            {/* <ImageBackground source={img} style={{width: '100%', height: '100%',opacity:0.9}}> */}
+                                <View style={styles.header}>
+                                    <Text style={styles.headerText}>Output</Text>
+                                </View>
+                                {/* Space for output */}
+                                <View style={{flex:6,alignItems:'center',justifyContent:'center',padding:14}}>
+                                    <Text style={styles.resultText}>{this.state.result}</Text>
+                                </View> 
+                            {/* </ImageBackground>        */}
                         </View>
                     </View>
                     <PushNotification/>
-                </ImageBackground>	
+                </ImageBackground>    
             </KeyboardAvoidingView>
     );
   }
