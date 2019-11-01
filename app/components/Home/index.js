@@ -1,11 +1,11 @@
 
-import React, { Component } from 'react';
+import React,{ Component } from 'react';
 import { View, Text, StyleSheet,TextInput, TouchableOpacity, ImageBackground, KeyboardAvoidingView } from 'react-native';
 import styles from './styles';
 import img from '../assets/background.jpg';
 import firebase from '../Config/config.js';
-import NotificationPopup from 'react-native-push-notification-popup';
-import PushNotification from '../Pushcontrol'
+// import NotificationPopup from 'react-native-push-notification-popup';
+// import PushNotification from '../Pushcontrol'
 
 export default class Home extends Component {
     constructor(props) {
@@ -27,7 +27,7 @@ export default class Home extends Component {
     }
 
     checkData=()=>{
-        let result = null;              
+        let result = null;      		
           
         firebase.database().ref('result/').on('value', (snapshot)=>{
             // console.log(snapshot.val());
@@ -59,48 +59,54 @@ export default class Home extends Component {
         this.checkData();
     }
 
-    render() {
+	render() {
         return (
-            <KeyboardAvoidingView>
-                <ImageBackground source={img} style={{width: '100%', height: '100%',}}>
+            
+            <ImageBackground source={img} style={{width: '100%', height: '100%',}}>
+                
                         {/* <NotificationPopup ref={ref => this.popup = ref} /> */}
-                    <View style={styles.container}>
-                        <View style={[styles.divide,{flex:5,}]}>
+
+                <View style={styles.container}>
+                    <View style={styles.divide}>
+                        {/* <KeyboardAvoidingView> */}
                             <View style={styles.header}>
-                                <Text style={styles.headerText}>Input</Text>
+                                    <Text style={[styles.headerText,{padding:15,color:'#ffffff',fontSize:52}]}>Input</Text>
                             </View>
                             {/* input area */}
                             <View style={styles.body}>
                                 {/* body area */}
-                            <View style={styles.inputPadding}>
-                                    <TextInput placeholderTextColor="#C0C0C0"
-                                        style={styles.input}
-                                        onChangeText={(text)=>this.setState({text})}
-                                        placeholder="Enter a Text"
-                                        keyboardType="default"
-                                        />
-                                </View>
-                                
                                 <View style={styles.inputPadding}>
-                                    <TextInput placeholderTextColor="#C0C0C0"
-                                        style={styles.input}
-                                        placeholder="Enter a Number"
-                                        onChangeText={(num)=>this.setState({num})}
-                                        keyboardType="number-pad"
-                                        />
-                                </View>
+                                        <TextInput placeholderTextColor="#C0C0C0"
+                                            style={styles.input}
+                                            onChangeText={(text)=>this.setState({text})}
+                                            placeholderTextColor="#ffffff"
+                                            placeholder="Enter a Text"
+                                            keyboardType="default"
+                                            />
+                                    </View>
+                                    
+                                    <View style={styles.inputPadding}>
+                                        <TextInput placeholderTextColor="#C0C0C0"
+                                            style={styles.input}
+                                            placeholder="Enter a Number"
+                                            placeholderTextColor="#ffffff"
+                                            onChangeText={(num)=>this.setState({num})}
+                                            keyboardType="number-pad"
+                                            />
+                                    </View>
 
-                                <View style={styles.inputPadding}>
-                                    <TouchableOpacity style={styles.submit} onPress={this.writeData}>
-                                        <Text style={styles.submitText}>Submit</Text>
-                                    </TouchableOpacity>
+                                    <View style={styles.inputPadding}>
+                                        <TouchableOpacity style={styles.submit} onPress={this.writeData}>
+                                            <Text style={styles.submitText}>Submit</Text>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
-                        </View>
+                        {/* </KeyboardAvoidingView> */}
 
-                        <View style={[styles.divide,{backgroundColor: '#FFFFFF',borderRadius:10,opacity:0.6,flex:4}]}>
+                        <View style={[styles.divide,{backgroundColor: '#FFFFFF',borderRadius:10,opacity:0.6}]}>
                             {/* <ImageBackground source={img} style={{width: '100%', height: '100%',opacity:0.9}}> */}
-                                <View style={styles.header}>
+                                <View style={[styles.header,{padding:15}]}>
                                     <Text style={styles.headerText}>Output</Text>
                                 </View>
                                 {/* Space for output */}
@@ -109,9 +115,9 @@ export default class Home extends Component {
                                 </View> 
                             {/* </ImageBackground>        */}
                         </View>
-                    </View>
-                </ImageBackground>    
-            </KeyboardAvoidingView>
+                </View>
+            </ImageBackground>    
+            
     );
   }
 }

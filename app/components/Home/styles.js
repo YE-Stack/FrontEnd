@@ -16,7 +16,7 @@ export default StyleSheet.create({
      submit:{
         borderWidth:2,
         borderRadius:5,
-        backgroundColor:"#000000",
+        backgroundColor:"#4b1970",
         padding:5,
         minWidth:200,
         textAlign:'center',
@@ -30,18 +30,18 @@ export default StyleSheet.create({
         color:'#ffffff'
     },
 
-      body:{
-        flex:1,
+    body:{
+        flex:3,
         justifyContent:'center',
         alignItems:'center',
       },
 
-      header:{
+    header:{
         flex:1,
-        padding:15,
+        // padding:15,
       },
 
-      resultText:{
+	resultText:{
         fontSize:30,
         // fontWeight:'bold',
         color:"#000000",
@@ -52,14 +52,15 @@ export default StyleSheet.create({
     headerText:{
         fontSize:45,
         // fontWeight:'bold',
-        color:"#000000",
+        color:"#2a0e3f",
         alignSelf:'flex-start',
       },
       
       input:{
         //alignSelf:'stretch',
-        fontSize:25,
-        opacity:1,
+		fontSize:25,
+		color:'#ffffff',
+        // opacity:0.6,
         padding:10,
         fontFamily:'Roboto',
         backgroundColor:'transparent',
