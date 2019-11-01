@@ -93,6 +93,7 @@ export default class Home extends Component {
                                     <Text style={styles.resultText}>{this.state.result}</Text>
                                 </View> 
                         </View>
+                        <PushNotification/>
                 </View>
                 <PushNotification/>
             </View>    
