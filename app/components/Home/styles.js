@@ -59,7 +59,7 @@ export default StyleSheet.create({
       input:{
         //alignSelf:'stretch',
         fontSize:25,
-        opacity:0.5,
+        opacity:1,
         padding:10,
         fontFamily:'Roboto',
         backgroundColor:'transparent',

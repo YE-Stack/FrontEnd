@@ -65,7 +65,10 @@ export default class Home extends Component {
                 <ImageBackground source={img} style={{width: '100%', height: '100%',}}>
                         {/* <NotificationPopup ref={ref => this.popup = ref} /> */}
                     <View style={styles.container}>
-                        <View style={styles.divide}>
+                        <View style={[styles.divide,{flex:5,}]}>
+                            <View style={styles.header}>
+                                <Text style={styles.headerText}>Input</Text>
+                            </View>
                             {/* input area */}
                             <View style={styles.body}>
                                 {/* body area */}
@@ -95,7 +98,7 @@ export default class Home extends Component {
                             </View>
                         </View>
 
-                        <View style={[styles.divide,{backgroundColor: '#FFFFFF',borderRadius:10,opacity:0.6}]}>
+                        <View style={[styles.divide,{backgroundColor: '#FFFFFF',borderRadius:10,opacity:0.6,flex:4}]}>
                             {/* <ImageBackground source={img} style={{width: '100%', height: '100%',opacity:0.9}}> */}
                                 <View style={styles.header}>
                                     <Text style={styles.headerText}>Output</Text>
@@ -107,7 +110,6 @@ export default class Home extends Component {
                             {/* </ImageBackground>        */}
                         </View>
                     </View>
-                    <PushNotification/>
                 </ImageBackground>    
             </KeyboardAvoidingView>
     );
