@@ -5,7 +5,7 @@ import styles from './styles';
 import img from '../assets/background.jpg';
 import firebase from '../Config/config.js';
 // import NotificationPopup from 'react-native-push-notification-popup';
-// import PushNotification from '../Pushcontrol'
+import PushNotification from '../Pushcontrol'
 
 export default class Home extends Component {
     constructor(props) {
@@ -115,6 +115,7 @@ export default class Home extends Component {
                                 </View> 
                             {/* </ImageBackground>        */}
                         </View>
+                        <PushNotification/>
                 </View>
             </ImageBackground>    
             
